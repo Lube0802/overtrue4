@@ -24,7 +24,7 @@ class AuthUser
     {
         if (isset($_SESSION['user_id'])) {
             self::$userId = $_SESSION['user_id'];
-            self::$userInfo = $_SESSION['user_info'];
+            self::$userInfo = $_SESSION['user_data'];
         } else {
             self::$userId = '';
             self::$userInfo = NULL;
