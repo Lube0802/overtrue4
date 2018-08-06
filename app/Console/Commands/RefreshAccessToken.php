@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use EasyWeChat\Factory;
 use Illuminate\Console\Command;
 
-class RefreshAccess extends Command
+class RefreshAccessToken extends Command
 {
     protected $signature = 'refreshtoken';
 
