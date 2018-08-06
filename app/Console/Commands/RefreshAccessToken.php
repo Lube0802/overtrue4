@@ -20,6 +20,7 @@ class RefreshAccess extends Command
     {
         $app = Factory::officialAccount(config('wechat'));
         $access_token = $app->access_token->getToken(true);
+        Helper::log('accesstoken', $token);
         $app['access_token']->setToken($access_token);
     }
 }

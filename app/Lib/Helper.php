@@ -32,4 +32,10 @@ class Helper
 
         return $matches[2];
     }
+
+    public function log($logFile, $msg)
+    {
+        $write = date('Y-m-d H:i:s')." :\n{$msg}\n";
+        file_put_contents(storage_path("logs/{$logFile}.log"), $write, FILE_APPEND);
+    }
 }
