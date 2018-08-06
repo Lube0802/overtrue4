@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'app_id' => 'wx4b86de063179211a',
-    'secret' => '0c324dff567345fd32b616619b522396',
+    'app_id' => 'wx91cfe6f91573a977',
+    'secret' => '59bfd8f7e02b7fe6fa08d3a3c8bf8c79',
 
     'response_type' => 'array',
 
