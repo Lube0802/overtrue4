@@ -20,8 +20,8 @@ class RefreshAccessToken extends Command
     public function handle()
     {
         $app = Factory::officialAccount(config('wechat'));
-        $access_token = $app->access_token->getToken(true);
-        Helper::log('accesstoken', $access_token);
-        $app['access_token']->setToken($access_token);
+        $access_token = $app->access_token->getToken(true); // 返回数组
+        Helper::log('accesstoken', $access_token['access_token']);
+        $app['access_token']->setToken($access_token['access_token']);
     }
 }
