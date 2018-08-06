@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Helper;
 use EasyWeChat\Factory;
 use Illuminate\Console\Command;
 
@@ -20,7 +21,7 @@ class RefreshAccessToken extends Command
     {
         $app = Factory::officialAccount(config('wechat'));
         $access_token = $app->access_token->getToken(true);
-        Helper::log('accesstoken', $token);
+        Helper::log('accesstoken', $access_token);
         $app['access_token']->setToken($access_token);
     }
 }
