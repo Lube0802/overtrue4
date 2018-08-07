@@ -9,7 +9,6 @@ class TestController extends BaseController
     public function test()
     {
         echo "NoAuthRoute<br />";
-        return Helper::sendJson(200, 'ok');
         print_r($_SESSION);
     }
 
