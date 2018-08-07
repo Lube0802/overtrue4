@@ -19,7 +19,7 @@ class Authenticate
      * @var array
      */
     private $whiteList = [
-
+        'api/logout',
     ];
 
 

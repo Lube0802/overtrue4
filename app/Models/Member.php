@@ -23,4 +23,13 @@ class Member extends BaseModel
 
         return $user_data;
     }
+
+    public static function getUserInfo($where, $fields = [])
+    {
+        if (empty($fields)) {
+            $fields = '*';
+        }
+
+        return DB::table('t_member')->select($fields)->where($where)->first();
+    }
 }
