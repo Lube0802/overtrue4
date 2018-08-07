@@ -82,7 +82,7 @@ class WxTestController extends BaseController
                 AuthUser::login($user_data);
             }
 
-            return He;per::sendJson(200, 'ok', ['url' => $return_url]);
+            return Helper::sendJson(200, 'ok', ['url' => $return_url]);
         } catch (\Exception $e) {
             AuthUser::del('wechat_info');
             Helper::log('wechatLoginError', $e->getMessage()."\n".$e->getTraceAsString());
