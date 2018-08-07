@@ -115,6 +115,6 @@ class WechatController extends BaseController
 
         $param = $app->jssdk->buildConfig(config('js_sdk'), $debug = false, $beta = false, $json = false);
 
-        return Helper::json(200, 'ok', $param);
+        return Helper::sendJson(200, 'ok', $param);
     }
 }
