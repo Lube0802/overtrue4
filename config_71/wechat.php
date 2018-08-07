@@ -54,4 +54,37 @@ return [
         'scopes'   => ['snsapi_userinfo'],
         'callback' => 'http://wx.lubetown.xin/api/login-callback',
     ],
+
+    'menu' => [
+        [
+            'type' => 'view',
+            'name' => '百度',
+            'url' => 'www.baidu.com'
+        ],
+        [
+            'type' => 'view',
+            'name' => '新浪',
+            'url' => 'www.sina.cn'
+        ],
+        [
+            'name' => '菜单',
+            'sub_button' => [
+                [
+                    'type' => 'view',
+                    'name' => '搜索',
+                    'url' => 'www.soso.com'
+                ],
+                [
+                    'type' => 'view',
+                    'name' => '视频',
+                    'url' => 'v.qq.com'
+                ],
+                [
+                    'type' => 'click',
+                    'name' => '赞',
+                    'key' => 'V1001_GOOD'
+                ],
+            ],
+        ],
+    ],
 ];
