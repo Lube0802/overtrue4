@@ -53,6 +53,14 @@ class WechatController extends BaseController
         return $app->server->serve();
     }
 
+    public function setMenu()
+    {
+        $menu = config('wechat')['menu'];
+        $app = Factory::officialAccount(config('wechat'));
+        $app->menu->create($menu);
+        return "<h1>The menu is created</h1>";
+    }
+
     public function doEvent($message)
     {
         return '事件消息';
