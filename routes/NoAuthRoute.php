@@ -10,3 +10,4 @@ $app->post('wechat', 'WechatController@index');
 $app->get('debug', 'AuthController@debug');
 
 $app->get('set-menu', 'WechatController@setMenu');
+$app->get('wechat-param', 'WechatController@getWechatParam');

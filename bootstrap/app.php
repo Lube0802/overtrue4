@@ -74,6 +74,7 @@ $app->routeMiddleware([
 ]);
 
 $app->configure('wechat');
+$app->configure('js_sdk');
 
 /*
 |--------------------------------------------------------------------------

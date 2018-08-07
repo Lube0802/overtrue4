@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Helper;
 use EasyWeChat\Factory;
+use Illuminate\Support\Facades\Input;
 
 class WechatController extends BaseController
 {
@@ -53,14 +55,6 @@ class WechatController extends BaseController
         return $app->server->serve();
     }
 
-    public function setMenu()
-    {
-        $menu = config('wechat')['menu'];
-        $app = Factory::officialAccount(config('wechat'));
-        $app->menu->create($menu);
-        return "<h1>The menu is created</h1>";
-    }
-
     public function doEvent($message)
     {
         return '事件消息';
@@ -99,5 +93,28 @@ class WechatController extends BaseController
     public function doFile($message)
     {
         return '文件消息';
+    }
+
+    public function setMenu()
+    {
+        $menu = config('wechat')['menu'];
+        $app = Factory::officialAccount(config('wechat'));
+        $app->menu->create($menu);
+        return "<h1>The menu is created</h1>";
+    }
+
+    public function getWechatParam($url = '')
+    {
+        $url = urldecode(Input::get('url', ''));
+
+        $app = Factory::officialAccount(config('wechat'));
+
+        if (!empty($url)) {
+            $app->jssdk->setUrl($url);
+        }
+
+        $param = $app->jssdk->buildConfig(config('js_sdk'), $debug = false, $beta = false, $json = false);
+
+        return Helper::json(200, 'ok', $param);
     }
 }
