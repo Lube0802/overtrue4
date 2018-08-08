@@ -185,6 +185,24 @@ class WechatController extends BaseController
                 'url' => 'http://www.baidu.com',
                 'image' => $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/imgs/wx/1.jpg',
             ]),
+            new NewsItem([
+                'title' => '标题2',
+                'descriptiom' => '描述2',
+                'url' => 'http://www.baidu.com',
+                'image' => $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/imgs/wx/2.jpg',
+            ]),
+            new NewsItem([
+                'title' => '标题3',
+                'descriptiom' => '描述3',
+                'url' => 'http://www.baidu.com',
+                'image' => $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/imgs/wx/3.jpg',
+            ]),
+            new NewsItem([
+                'title' => '标题4',
+                'descriptiom' => '描述4',
+                'url' => 'http://www.baidu.com',
+                'image' => $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/imgs/wx/4.jpg',
+            ]),
         ];
 
         return new News($items);
