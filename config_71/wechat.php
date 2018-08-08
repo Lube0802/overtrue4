@@ -59,12 +59,12 @@ return [
         [
             'type' => 'view',
             'name' => '百度',
-            'url' => 'www.baidu.com'
+            'url' => 'http://www.baidu.com'
         ],
         [
             'type' => 'view',
             'name' => '新浪',
-            'url' => 'www.sina.cn'
+            'url' => 'http://www.sina.cn'
         ],
         [
             'name' => '菜单',
@@ -72,12 +72,12 @@ return [
                 [
                     'type' => 'view',
                     'name' => '搜索',
-                    'url' => 'www.soso.com'
+                    'url' => 'http://www.soso.com'
                 ],
                 [
                     'type' => 'view',
                     'name' => '视频',
-                    'url' => 'v.qq.com'
+                    'url' => 'http://v.qq.com'
                 ],
                 [
                     'type' => 'click',
