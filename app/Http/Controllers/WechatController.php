@@ -112,6 +112,14 @@ class WechatController extends BaseController
         return "<h1>Menu has updated</h1>";
     }
 
+    public function showMenu()
+    {
+        $app = Factory::officialAccount(config('wechat'));
+        $list = $app->menu->list();
+        $current = $app->menu->current();
+        var_dump($list, $current);
+    }
+
     public function getWechatParam($url = '')
     {
         $url = urldecode(Input::get('url', ''));

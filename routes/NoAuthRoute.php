@@ -11,4 +11,5 @@ $app->get('debug', 'AuthController@debug');
 
 $app->get('set-menu', 'WechatController@setMenu');
 $app->get('upd-menu', 'WechatController@updMenu');
+$app->get('show-menu', 'WechatController@showMenu');
 $app->get('wechat-param', 'WechatController@getWechatParam');
