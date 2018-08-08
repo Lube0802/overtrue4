@@ -210,7 +210,12 @@ class WechatController extends BaseController
 
     public function doLocation($message)
     {
-        return '坐标消息';
+        $msg = "你的位置：".
+            "\n经度：".$message['Location_Y'].
+            "\n纬度：".$message['Location_X'].
+            "\n位置：".$message['Label'];
+
+        return new Text($msg);
     }
 
     public function doLink($message)
