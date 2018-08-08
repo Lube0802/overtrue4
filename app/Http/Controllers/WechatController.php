@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use EasyWeChat\Kernel\Messages\Text;
 use Helper;
 use EasyWeChat\Factory;
 use Illuminate\Support\Facades\Input;
@@ -13,7 +14,7 @@ class WechatController extends BaseController
         $app = Factory::officialAccount(config('wechat'));
 
         $app->server->push(function ($message) {
-            switch ($message['MsgType']) {
+            switch ($message->MsgType) {
                 // 事件消息
                 case 'event':
                     return $this->doEvent($message);
@@ -55,9 +56,70 @@ class WechatController extends BaseController
         return $app->server->serve();
     }
 
+    /**
+     * 事件消息
+     * subscribe 关注 unsubscribe 取消关注 LOCATION 上报地理位置
+     * @param $message
+     * @return string
+     */
     public function doEvent($message)
     {
-        return '事件消息';
+        switch ($message->Event) {
+            // 关注事件
+            case 'subscribe':
+                return $this->eventSubscribe($message);
+                break;
+            // 取消关注事件
+            case 'unsubscribe':
+                return $this->eventUnSubscribe($message);
+                break;
+            // 上报地理位置事件
+            case 'LOCATION':
+                return $this->eventLocation($message);
+                break;
+        }
+
+        // 自定义菜单事件
+        switch ($message->EventKey) {
+            case 'V1001_GOOD':
+                return $this->eventLike($message);
+                break;
+        }
+    }
+
+    public function eventSubscribe($message)
+    {
+        $redis = app('redis');
+
+        if (isset($message->EventKey)) {
+            $key = preg_replace('/qrscene_/', '', $message->EventKey);
+            $redis->hset('test:subscribe-key', $message->FromUserName, $key);
+        }
+
+        return new Text(config('wechat')['welcome']);
+    }
+
+    public function eventUnSubscribe($message)
+    {
+        $redis = app('redis');
+
+        $redis->hdel('test:subscribe-key', $message->FromUserName);
+
+        return;
+    }
+
+    public function eventLocation($message)
+    {
+        $latitude = $message->Latitude; // 纬度
+        $longitude = $message->Longitude; // 经度
+        $precision = $message->Precision; // 精度
+
+        return new Text("经度：{$latitude}\n纬度：{$longitude}\n精度：{$precision}\n");
+    }
+
+    public function eventLike($message)
+    {
+        return new Text("EventKey：".$message->EventKey);
     }
 
     public function doText($message)

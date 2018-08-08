@@ -55,6 +55,9 @@ return [
         'callback' => 'http://wx.lubetown.xin/api/login-callback',
     ],
 
+    /**
+     * 菜单
+     */
     'menu' => [
         [
             'type' => 'view',
@@ -87,4 +90,6 @@ return [
             ],
         ],
     ],
+
+    'welcome' => '首次关注',
 ];
