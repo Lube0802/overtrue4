@@ -183,7 +183,7 @@ class WechatController extends BaseController
                 'title' => '标题1',
                 'descriptiom' => '描述1',
                 'url' => 'http://www.baidu.com',
-                'image' => $_SERVER['HTTP_HOST'].'/imgs/wx/1.jpg',
+                'image' => $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/imgs/wx/1.jpg',
             ]),
         ];
 
