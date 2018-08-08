@@ -221,8 +221,8 @@ class WechatController extends BaseController
     public function doLink($message)
     {
         $msg = "标题：".$message['Title'].
-            "\n描述".$message['Description'].
-            "\n链接".$message['Url'];
+            "\n描述：".$message['Description'].
+            "\n链接：".$message['Url'];
 
         return new Text($msg);
     }
