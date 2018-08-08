@@ -220,7 +220,11 @@ class WechatController extends BaseController
 
     public function doLink($message)
     {
-        return '链接消息';
+        $msg = "标题：".$message['Title'].
+            "\n描述".$message['Description'].
+            "\n链接".$message['Url'];
+
+        return new Text($msg);
     }
 
     public function doFile($message)
