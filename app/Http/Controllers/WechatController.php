@@ -14,7 +14,7 @@ class WechatController extends BaseController
         $app = Factory::officialAccount(config('wechat'));
 
         $app->server->push(function ($message) {
-            switch ($message->MsgType) {
+            switch ($message['MsgType']) {
                 // 事件消息
                 case 'event':
                     return $this->doEvent($message);
@@ -64,7 +64,7 @@ class WechatController extends BaseController
      */
     public function doEvent($message)
     {
-        switch ($message->Event) {
+        switch ($message['Event']) {
             // 关注事件
             case 'subscribe':
                 return $this->eventSubscribe($message);
@@ -80,7 +80,7 @@ class WechatController extends BaseController
         }
 
         // 自定义菜单事件
-        switch ($message->EventKey) {
+        switch ($message['EventKey']) {
             case 'V1001_GOOD':
                 return $this->eventLike($message);
                 break;
@@ -91,9 +91,9 @@ class WechatController extends BaseController
     {
         $redis = app('redis');
 
-        if (isset($message->EventKey)) {
-            $key = preg_replace('/qrscene_/', '', $message->EventKey);
-            $redis->hset('test:subscribe-key', $message->FromUserName, $key);
+        if (isset($message['EventKey'])) {
+            $key = preg_replace('/qrscene_/', '', $message['EventKey']);
+            $redis->hset('test:subscribe-key', $message['FromUserName'], $key);
         }
 
         return new Text(config('wechat')['welcome']);
@@ -103,23 +103,23 @@ class WechatController extends BaseController
     {
         $redis = app('redis');
 
-        $redis->hdel('test:subscribe-key', $message->FromUserName);
+        $redis->hdel('test:subscribe-key', $message['FromUserName']);
 
         return;
     }
 
     public function eventLocation($message)
     {
-        $latitude = $message->Latitude; // 纬度
-        $longitude = $message->Longitude; // 经度
-        $precision = $message->Precision; // 精度
+        $latitude = $message['Latitude']; // 纬度
+        $longitude = $message['Longitude']; // 经度
+        $precision = $message['Precision']; // 精度
 
         return new Text("经度：{$latitude}\n纬度：{$longitude}\n精度：{$precision}\n");
     }
 
     public function eventLike($message)
     {
-        return new Text("EventKey：".$message->EventKey);
+        return new Text("EventKey：".$message['EventKey']);
     }
 
     public function doText($message)
