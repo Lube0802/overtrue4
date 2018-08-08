@@ -103,6 +103,15 @@ class WechatController extends BaseController
         return "<h1>The menu is created</h1>";
     }
 
+    public function updMenu()
+    {
+        $menu = config('wechat')['menu'];
+        $app = Factory::officialAccount(config('wechat'));
+        $app->menu->delete();
+        $app->menu->create($menu);
+        return "<h1>Menu has updated</h1>";
+    }
+
     public function getWechatParam($url = '')
     {
         $url = urldecode(Input::get('url', ''));
