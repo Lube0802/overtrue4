@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use EasyWeChat\Kernel\Messages\Image;
+use EasyWeChat\Kernel\Messages\News;
+use EasyWeChat\Kernel\Messages\NewsItem;
 use EasyWeChat\Kernel\Messages\Text;
+use EasyWeChat\Kernel\Messages\Voice;
 use Helper;
 use EasyWeChat\Factory;
 use Illuminate\Support\Facades\Input;
@@ -142,7 +146,7 @@ class WechatController extends BaseController
     }
 
     /**
-     * 文字事件
+     * 文字消息
      * @param $message
      * @return Text
      */
@@ -151,19 +155,39 @@ class WechatController extends BaseController
         return new Text('你好，'.$message['FromUserName']);
     }
 
+    /**
+     * 图片消息
+     * @param $message
+     * @return Image
+     */
     public function doImage($message)
     {
-        return '图片消息';
+        return new Image('CCEgqXsZHPDFicPpIfGKejcXErUFgM8M3SnU8Emuzc1a8eDrfDiJlXhvyMI5oDvB');
     }
 
+    /**
+     * 语音消息
+     * @param $message
+     * @return Voice
+     */
     public function doVoice($message)
     {
-        return '语音消息';
+        return new Voice('QyLUrahfNoDxgeCW7yzoPpDcYA8fFTWLxfbBUoDOrX89uUxRlpTQxvrHKtH_g3ry');
     }
 
     public function doVideo($message)
     {
-        return '视频消息';
+        // 回复图文消息
+        $items = [
+            new NewsItem([
+                'title' => '标题1',
+                'descriptiom' => '描述1',
+                'url' => 'http://www.baidu.com',
+                'image' => '/imgs/wx/1.jpg',
+            ]),
+        ];
+
+        return new News($items);
     }
 
     public function doLocation($message)

@@ -24,7 +24,7 @@ class WechatTools extends Command
 
     public function handle()
     {
-        $this->logger->info("\ncommand start execute");
+        $this->logger->info("command start execute");
         $app = Factory::officialAccount(config('wechat'));
         $cmd = $this->argument('cmd');
         $file = $this->argument('param');
