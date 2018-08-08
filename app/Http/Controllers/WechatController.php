@@ -87,6 +87,11 @@ class WechatController extends BaseController
         }
     }
 
+    /**
+     * 关注事件
+     * @param $message
+     * @return Text
+     */
     public function eventSubscribe($message)
     {
         $redis = app('redis');
@@ -99,6 +104,10 @@ class WechatController extends BaseController
         return new Text(config('wechat')['welcome']);
     }
 
+    /**
+     * 取关事件
+     * @param $message
+     */
     public function eventUnSubscribe($message)
     {
         $redis = app('redis');
@@ -108,6 +117,11 @@ class WechatController extends BaseController
         return;
     }
 
+    /**
+     * 上报地理位置事件
+     * @param $message
+     * @return Text
+     */
     public function eventLocation($message)
     {
         $latitude = $message['Latitude']; // 纬度
@@ -117,14 +131,24 @@ class WechatController extends BaseController
         return new Text("经度：{$latitude}\n纬度：{$longitude}\n精度：{$precision}\n");
     }
 
+    /**
+     * 自定义菜单事件
+     * @param $message
+     * @return Text
+     */
     public function eventLike($message)
     {
         return new Text("EventKey：".$message['EventKey']);
     }
 
+    /**
+     * 文字事件
+     * @param $message
+     * @return Text
+     */
     public function doText($message)
     {
-        return '文字消息';
+        return new Text('你好，'.$message['FromUserName']);
     }
 
     public function doImage($message)
